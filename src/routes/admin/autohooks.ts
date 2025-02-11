@@ -1,31 +1,23 @@
-import fastifyJwt from "@fastify/jwt";
-import { FastifyInstance, FastifyRequest } from "fastify";
-import fp from 'fastify-plugin';
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
-// 排除请求
+// Exclude request
 const excludeRoutes = [
-    '^/api/.*',
     '^/admin/login',
 ]
-export default async function(fastify: FastifyInstance, options: any)  {
-// export default fp(async (fastify: FastifyInstance, options: any) => {
-    // 注册JWT
-    fastify.register(fastifyJwt, { secret: 'your-secret-key' });
-    // 添加请求钩子
-    fastify.addHook('onRequest', async (request, reply) => {
-        // const matched = excludeRoutes.filter((route) => {
-        //     return request.url.match(route)
-        // })
-        // if (matched.length > 0) {
-        //     return;
-        // }
-        // 拦截所有请求进行验证Token
+export default async function (fastify: FastifyInstance, options: any) {
+    fastify.addHook('onRequest', async (request: FastifyRequest, reply: FastifyReply) => {
+        const matched = excludeRoutes.filter((route) => {
+            return request.url.match(route)
+        })
+        if (matched.length > 0) {
+            return;
+        }
+        // Intercept all requests to verify Token
         const token = request.headers['authorization'];
         if (!token) {
             reply.code(401).send({ message: 'Token is required' });
             return;
         }
-        // 验证Token的逻辑，例如解析Token并检查有效性
         try {
             await request.jwtVerify();
         } catch (error) {
@@ -34,5 +26,4 @@ export default async function(fastify: FastifyInstance, options: any)  {
         }
     })
 }
-// )
 

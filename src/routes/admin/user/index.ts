@@ -12,8 +12,4 @@ async function routes(fastify: FastifyInstance, options: any) {
     });
 }
 
-// async function userRoutes(fastify: FastifyInstance, options: any) {
-//     fastify.register(routes, { prefix: '/user' })
-// }
-
 export default routes;

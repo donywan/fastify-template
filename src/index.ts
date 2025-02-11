@@ -3,6 +3,7 @@ import cors from '@fastify/cors'
 import fastifyAutoload from '@fastify/autoload'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import fastifyJwt from '@fastify/jwt'
 
 const loggerOptions = {
   development: {
@@ -51,18 +52,14 @@ const server = fastify({
   logger: e === 'production' ? loggerOptions.production : loggerOptions.development
 })
 
-// system
+// system plugin
 server.register(cors)
+server.register(fastifyJwt, { secret: 'your-secret-key' });
 
-// 自动加载路由,路由地址为`文件夹名称/路由名称`
+// Autoloan plugin, the route address is `prefix + autoPrefix + routeName`
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-// server.register(fastifyAutoload,
-//   {
-//     dir: join(__dirname, 'hooks'),
-//   }
-// )
 // admin api
 server.register(fastifyAutoload,
   {
