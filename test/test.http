@@ -1,0 +1,12 @@
+GET http://localhost:3000/ping HTTP/1.1
+
+### 
+
+POST http://localhost:3000/admin/user HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer 1eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzM5MTc0NDM4fQ.oFGLrHSwVCdjyaAuTQm7F30avedBlmDOIZK-YhxjYPc
+
+{
+  "name": "test1",
+  "age": 231111
+}
