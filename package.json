@@ -15,10 +15,10 @@
   "dependencies": {
     "@fastify/auth": "^5.0.2",
     "@fastify/autoload": "^6.1.0",
-    "@fastify/bearer-auth": "^10.0.2",
+    "@fastify/bearer-auth": "^10.1.0",
     "@fastify/cors": "^10.0.2",
     "@fastify/env": "^5.0.2",
-    "@fastify/jwt": "^9.0.3",
+    "@fastify/jwt": "^9.0.4",
     "@fastify/multipart": "^9.0.3",
     "drizzle-orm": "^0.39.3",
     "fastify": "^5.2.1",
